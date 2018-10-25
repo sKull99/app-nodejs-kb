@@ -1,8 +1,5 @@
-FROM node:9.4.0-alpine
-COPY app.js .
-COPY package.json .
-RUN npm install &&\
-    apk update &&\
-    apk upgrade
+FROM nginx:mainline-alpine
+RUN rm /etc/nginx/conf.d/*
+ADD demo.conf /etc/nginx/conf.d/
+ADD index.html /usr/share/nginx/html/
 EXPOSE  8080
-CMD node app.js
